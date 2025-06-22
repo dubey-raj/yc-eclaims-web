@@ -20864,7 +20864,7 @@ pre[class*=language-]:before {
     line-height: 50px;
     display: inline-block;
     text-align: center;
-    width: 40px;
+    width: 100px;
 }
 
 .pcoded-header .dropdown .dropdown-toggle:after {
@@ -22053,7 +22053,7 @@ pre[class*=language-]:before {
     position: relative;
     display: block;
     padding: 25px;
-    margin-top: 140px;
+    margin-top: 110px;
 }
 
 .pcoded-main-container {
