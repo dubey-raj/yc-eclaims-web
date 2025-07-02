@@ -5,6 +5,7 @@ import { AddClaimComponent } from './features/claims/add-claim/add-claim.compone
 import { AssesmentComponent } from './features/claims/assesment/assesment.component';
 import { ReviewComponent } from './features/claims/review/review.component';
 import { ListClaimsComponent } from './features/claims/list-claims/list-claims.component';
+import { ViewClaimComponent } from './features/claims/view-claim/view-claim.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -14,6 +15,7 @@ export const routes: Routes = [
         children: [
             { path: 'add-claim', component: AddClaimComponent, data: { title: "New Claim", breadcrumb: "Add Claim" } },
             { path: 'my-claims', component: ListClaimsComponent, data: { title: "My Claims", breadcrumb: "My Claims" } },
+            { path: 'view-claim/:claimNumber',component: ViewClaimComponent, data:{ title: 'Claim Details', breadcrumb: "Claim Details" }},
             { path: 'assess-claim', component: AssesmentComponent, data: { title: "Claim Assessment", breadcrumb: "Claim Assessment" } },
             { path: 'review-claim', component: ReviewComponent, data: { title: "Review Claim", breadcrumb: "Review Claim" } }
         ]

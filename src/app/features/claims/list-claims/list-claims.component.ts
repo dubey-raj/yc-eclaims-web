@@ -1,23 +1,32 @@
 import { Component } from '@angular/core';
 import { Claim } from '../../../core/models/claim';
 import { CommonModule } from '@angular/common';
+import { ClaimService } from '../../../core/services/claim.service';
+import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-claims',
   standalone: true,
   imports: [CommonModule],
+  providers: [ClaimService],
   templateUrl: './list-claims.component.html',
   styleUrl: './list-claims.component.scss'
 })
 export class ListClaimsComponent {
-  claims: Claim[] = [];
 
-  ngOnInit(): void {
-    // Simulated data – replace with real service call
-    this.claims = [
-      { id: 'CLM-1001', status: 'Under Review', submittedDate: '2025-06-15', vehicleNumber: 'MH12AB1234' },
-      { id: 'CLM-1002', status: 'Approved', submittedDate: '2025-06-10', vehicleNumber: 'MH14CD5678', amount: 1220 },
-      { id: 'CLM-1003', status: 'Rejected', submittedDate: '2025-06-01', vehicleNumber: 'DL8CAF4321' }
-    ];
+  claims: Claim[] = [];
+  selectedClaim: Claim | null = null;
+
+  constructor(private router:Router, private claimService: ClaimService){}
+
+  async ngOnInit(): Promise<void> {
+    await firstValueFrom(this.claimService.getClaims()).then((claimResult) =>{
+      this.claims = claimResult.claims;
+    });
+  }
+
+  openClaimDetails(claim: Claim): void {
+    this.router.navigate(['/claims/view-claim', claim.claimNumber]);
   }
 }

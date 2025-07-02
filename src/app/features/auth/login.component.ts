@@ -5,16 +5,16 @@ import { LoaderService } from '../../core/services/loader.service';
 import { AuthService } from '../../core/services/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { TokenStorageService } from '../../core/services/token-storage.service';
 import { LocalStorageService } from '../../core/services/local-storage.service';
 import { AccountService } from '../../core/services/account.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
-  providers: [AuthService, LocalStorageService, TokenStorageService, AccountService],
+  imports: [CommonModule, ReactiveFormsModule],
+  providers: [AuthService, LocalStorageService, TokenStorageService, AccountService, NotificationService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -56,7 +56,7 @@ export class LoginComponent {
         this.f['password'].value
       )
     ).then(() => {
-      this.router.navigate(['/claims']);
+      this.router.navigate(['/claims/my-claims']);
     });
   }
 

@@ -8,9 +8,10 @@ import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE_ENTRIES, ROUTE_PATHS } from '../constants/appConstants';
 import { environment } from '../../../environments/environment';
-import { User } from '../models/User';
+import { User } from '../models/user';
 import { jwtDecode } from 'jwt-decode';
 import { AccountService } from './account.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class AuthService extends RestService {
     private tokenStorageToken: TokenStorageService,
     private localStorageService: LocalStorageService,
     private accountService: AccountService,
+    private notificationService: NotificationService,
     private router: Router
   ) {
     super(http, environment.authUrl);
@@ -67,7 +69,7 @@ export class AuthService extends RestService {
           await this.loadUserDetails(claims.sub);
           this.isLogged.next(true);
         } else {
-          //this.notificationService.showError(result.errorDescription);
+          this.notificationService.showError(result.errorDescription);
         }
 
         return result;

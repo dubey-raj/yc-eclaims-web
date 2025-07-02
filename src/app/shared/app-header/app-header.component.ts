@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { AccountService } from '../../core/services/account.service';
-import { User } from '../../core/models/User';
+import { User } from '../../core/models/user';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -19,5 +19,8 @@ export class AppHeaderComponent {
     if(this.authService.currentUser){
       this.user = this.authService.currentUser;
     }
+  }
+  logout(){
+    this.authService.logout();
   }
 }

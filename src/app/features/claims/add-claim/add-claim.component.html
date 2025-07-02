@@ -1,67 +1,146 @@
-<div class="row">
+<form [formGroup]="eclaimForm" (ngSubmit)="onSubmit()">
+  <div class="row">
     <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <!-- Left Column -->
-                    <div class="col-md-6">
-                      <form>
-                        <div class="form-group">
-                          <label for="claimantName">Full Name</label>
-                          <input type="text" class="form-control" id="claimantName" placeholder="Enter your full name">
-                        </div>
-                        <div class="form-group">
-                          <label for="claimantEmail">Email address</label>
-                          <input type="email" class="form-control" id="claimantEmail" aria-describedby="emailHelp" placeholder="Enter email">
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                          <label for="claimantPhone">Phone Number</label>
-                          <input type="tel" class="form-control" id="claimantPhone" placeholder="Enter phone number">
-                        </div>
-                        <div class="form-group">
-                          <label for="vehicleNumber">Vehicle Registration Number</label>
-                          <input type="text" class="form-control" id="vehicleNumber" placeholder="e.g. MH12AB1234">
-                        </div>
-                        <div class="form-group">
-                          <label for="vehicleModel">Vehicle Make & Model</label>
-                          <input type="text" class="form-control" id="vehicleModel" placeholder="e.g. Honda City">
-                        </div>
-                        <div class="form-group">
-                          <label for="vehicleYear">Manufacture Year</label>
-                          <input type="number" class="form-control" id="vehicleYear" placeholder="e.g. 2022">
-                        </div>
-                      </form>
-                    </div>
-                  
-                    <!-- Right Column -->
-                    <div class="col-md-6">
-                      <form>
-                        <div class="form-group">
-                          <label for="incidentDate">Incident Date</label>
-                          <input type="date" class="form-control" id="incidentDate">
-                        </div>
-                        <div class="form-group">
-                          <label for="incidentLocation">Incident Location</label>
-                          <input type="text" class="form-control" id="incidentLocation" placeholder="Enter location">
-                        </div>
-                        <div class="form-group">
-                          <label for="incidentDescription">Incident Description</label>
-                          <textarea class="form-control" id="incidentDescription" rows="3" placeholder="Describe the incident"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label for="supportingFiles">Upload Supporting Documents</label>
-                          <input type="file" class="form-control" id="supportingFiles" multiple>
-                        </div>
-                        <div class="form-group form-check">
-                          <input type="checkbox" class="form-check-input" id="termsCheck">
-                          <label class="form-check-label" for="termsCheck">I confirm that the above information is correct.</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit eClaim</button>
-                      </form>
-                    </div>
-                  </div>                  
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="claimantName">Full Name</label>
+                <input type="text" class="form-control" id="claimantName" formControlName="claimantName" readonly>
+              </div>
             </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="claimantEmail">Email address</label>
+                <input type="email" class="form-control" id="claimantEmail" formControlName="claimantEmail" readonly>
+                <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="claimantPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="claimantPhone" formControlName="claimantPhone" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <!-- Policy Section -->
+              <div class="form-group">
+                <label for="policyNumber">Policy Number</label>
+                <select class="form-control" id="policyNumber" formControlName="policyNumber"
+                  (change)="onPolicyChange($event)">
+                  <option value="">Select Policy</option>
+                  <option *ngFor="let policy of userPolicies" [value]="policy.policyNumber">{{ policy.policyNumber }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="policyStartDate">Policy Start Date</label>
+                <input type="text" class="form-control" id="policyStartDate" formControlName="policyStartDate" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="coverageType">Coverage Type</label>
+                <input type="text" class="form-control" id="coverageType" formControlName="coverageType" readonly>
+              </div>
+              <div class="form-group">
+                <label for="policyEndDate">Policy End Date</label>
+                <input type="text" class="form-control" id="policyEndDate" formControlName="policyEndDate" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="policyAmount">Policy Coverage Amount</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">&#8377;</span>
+                </div>
+                <input type="text" class="form-control" id="policyAmount" formControlName="policyAmount" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="vehicleNumber">Vehicle Registration Number</label>
+                <input type="text" class="form-control" id="vehicleNumber" formControlName="vehicleNumber" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="vehicleModel">Vehicle Make & Model</label>
+                <input type="text" class="form-control" id="vehicleModel" formControlName="vehicleModel" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="vehicleYear">Manufacture Year</label>
+                <input type="number" class="form-control" id="vehicleYear" formControlName="vehicleYear" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="incidentDate">Incident Date</label>
+                <input type="date" class="form-control" id="incidentDate" formControlName="incidentDate"
+                  [max]="maxDate">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="incidentLocation">Incident Location</label>
+                <input type="text" class="form-control" id="incidentLocation" formControlName="incidentLocation"
+                  placeholder="Enter location">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="incidentDescription">Incident Description</label>
+                <textarea class="form-control" id="incidentDescription" rows="3" formControlName="incidentDescription"
+                  placeholder="Describe the incident"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="supportingFiles">Upload Supporting Documents(PDF only)</label>
+                <input type="file" class="form-control" id="supportingFiles" 
+                (change)="onFileChange($event)"  multiple accept="pdf/*">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div *ngFor="let file of selectedFiles; let i = index" class="col-md-4">
+                  <div class="d-flex align-items-center" [title]="file.name">
+                    <i class="feather icon-file-text text-secondary me-2"></i>
+                    <span class="text-truncate d-inline-block" style="max-width: 200px;">
+                      {{ file.name.length > 20 ? (file.name | slice:0:20) + '…' : file.name }}
+                    </span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary" (click)="previewFile(i, $event)">
+                    <i class="feather icon-eye"></i> Preview
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="termsCheck" formControlName="termsCheck">
+                <label class="form-check-label" for="termsCheck">I confirm that the above information is
+                  correct.</label>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="eclaimForm.invalid">Submit eClaim</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</form>

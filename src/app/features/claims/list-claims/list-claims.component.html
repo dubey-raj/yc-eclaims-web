@@ -9,7 +9,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>Claim ID</th>
+                                        <th>Claim Number</th>
                                         <th>Vehicle</th>
                                         <th>Submitted Date</th>
                                         <th>Status</th>
@@ -18,19 +18,23 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let claim of claims">
-                                        <td>{{ claim.id }}</td>
+                                        <td><a href="javascript:void(0)" (click)="openClaimDetails(claim)"
+                                                data-bs-toggle="modal" data-bs-target="#claimDetailsModal">
+                                                {{ claim.claimNumber }}
+                                            </a></td>
                                         <td>{{ claim.vehicleNumber }}</td>
-                                        <td>{{ claim.submittedDate }}</td>
+                                        <td>{{ claim.incidentDate }}</td>
                                         <td>
                                             <span class="badge" [ngClass]="{
-                  'bg-primary': claim.status === 'Under Review',
-                  'bg-success': claim.status === 'Approved',
-                  'bg-danger': claim.status === 'Rejected'
-                }">
+                                                'bg-success': claim.status === 'approved',
+                                                'bg-warning': claim.status === 'underreview',
+                                                'bg-danger': claim.status === 'rejected',
+                                                'bg-info': claim.status === 'Submitted'
+                                              }">
                                                 {{ claim.status }}
                                             </span>
                                         </td>
-                                        <td>{{ claim.amount ? ('$' + claim.amount) : '-' }}</td>
+                                        <td>{{ claim.approvedAmount ? ('$' + claim.approvedAmount) : '-' }}</td>
                                     </tr>
                                 </tbody>
                             </table>

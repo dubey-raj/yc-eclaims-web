@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 import { RestService } from './http/rest.service';
 import { environment } from '../../../environments/environment';
-import { User } from '../models/User';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class AccountService extends RestService {
   }
 
   public loadUserDetails(userId: any): Observable<User> {
-    return this.get(`user/${userId}`).pipe(
+    return this.get(`user-api/user/${userId}`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return [];
