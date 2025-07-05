@@ -56,7 +56,12 @@ export class LoginComponent {
         this.f['password'].value
       )
     ).then(() => {
-      this.router.navigate(['/claims/my-claims']);
+      const userRole = this.authenticationService.userRole;
+      let landingPageUrl = '/claims/assigned-claims';
+      if(userRole == 'Customer'){
+        landingPageUrl = '/claims/my-claims';
+      }
+      this.router.navigate([landingPageUrl]);
     });
   }
 

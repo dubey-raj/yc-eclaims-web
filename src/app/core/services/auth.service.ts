@@ -31,13 +31,6 @@ export class AuthService extends RestService {
     super(http, environment.authUrl);
   }
 
-  public get currentUserId(): string | null {
-    const storedUser = this.localStorageService.getValueByKey(
-      LOCAL_STORAGE_ENTRIES.storedUserId
-    );
-    return storedUser;
-  }
-
   public get currentUser(): User | null {
     const storedUserData = this.localStorageService.getValueByKey(
       LOCAL_STORAGE_ENTRIES.storedUser
@@ -64,7 +57,6 @@ export class AuthService extends RestService {
           let claims: any;
           claims = jwtDecode(result.accessToken);
           this.tokenStorageToken.setToken(result.accessToken);
-          this.localStorageService.setValue(LOCAL_STORAGE_ENTRIES.storedUserId, claims.sub);
           this.localStorageService.setValue(LOCAL_STORAGE_ENTRIES.storedUserRole, claims.role);
           await this.loadUserDetails(claims.sub);
           this.isLogged.next(true);
@@ -80,7 +72,6 @@ export class AuthService extends RestService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem(LOCAL_STORAGE_ENTRIES.storedUser);
-    localStorage.removeItem(LOCAL_STORAGE_ENTRIES.storedUserId);
     this.tokenStorageToken.clearToken();
 
     // broadcasting to listeners

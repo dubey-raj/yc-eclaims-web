@@ -13,5 +13,8 @@ export interface Claim {
     submittedAt: string
     estimatedAmount: any
     approvedAmount: number
+    inspectionDate: string
+    inspectionNote:string
+    inspectorRecommendation: string
     documentUrls: string[]
 }  

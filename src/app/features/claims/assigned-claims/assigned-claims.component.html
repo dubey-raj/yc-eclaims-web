@@ -26,9 +26,9 @@
                                         <td>{{ claim.incidentDate }}</td>
                                         <td>
                                             <span class="badge" [ngClass]="{
-                                                'bg-success': claim.status === 'Approved',
-                                                'bg-warning': claim.status === 'UnderReview',
-                                                'bg-danger': claim.status === 'Rejected',
+                                                'bg-success': claim.status === 'approved',
+                                                'bg-warning': claim.status === 'underreview',
+                                                'bg-danger': claim.status === 'rejected',
                                                 'bg-info': claim.status === 'Submitted'
                                               }">
                                                 {{ claim.status }}

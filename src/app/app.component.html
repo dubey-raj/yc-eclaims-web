@@ -4,4 +4,5 @@
     <div class="loader-fill"></div>
   </div>
 </div>
+<app-modal *ngIf="modalComponent" [component]="modalComponent" [title]="modalTitle"></app-modal>
 <router-outlet></router-outlet>

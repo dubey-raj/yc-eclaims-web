@@ -33,18 +33,15 @@ export class AppNavComponent {
 
       case 'inspector':
         this.navItems = [
-          { label: 'Assigned Claims', icon: 'feather icon-briefcase', path: '/assigned-claims' },
-          //{ label: 'Submit Assessment', icon: 'feather icon-file-plus', path: '/submit-assessment' },
-          { label: 'My Assessments', icon: 'feather icon-check-circle', path: '/completed-assessments' }
+          { label: 'Assess Claims', icon: 'feather icon-briefcase', path: '/claims/assigned-claims' },
+          { label: 'My Assessments', icon: 'feather icon-check-circle', path: '/claims/completed-assessments' }
         ];
         break;
 
-      case 'officer':
+      case 'manager':
         this.navItems = [
-          { label: 'Review Claims', icon: 'feather icon-inbox', path: '/review-queue' },
-          { label: 'All Claims', icon: 'feather icon-database', path: '/all-claims' },
-          { label: 'User Management', icon: 'feather icon-users', path: '/users' },
-          //{ label: 'Logout', icon: 'feather icon-log-out m-r-5', path: '/logout' }
+          { label: 'Review Claims', icon: 'feather icon-briefcase', path: '/claims/assigned-claims' },
+          { label: 'User Management', icon: 'feather icon-users', path: '/users' }
         ];
         break;
     }

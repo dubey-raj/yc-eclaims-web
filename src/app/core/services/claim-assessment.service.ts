@@ -3,22 +3,29 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 import { RestService } from './http/rest.service';
 import { environment } from '../../../environments/environment';
-import { Policy } from '../models/policy';
-import { ClaimRequest } from '../models/claim-request';
 import { Claim, ClaimList } from '../models/claim';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClaimService extends RestService {
-  controllerName = 'claim-service/claim';
+export class ClaimAssessmentService extends RestService {
+  controllerName = 'claim-service/claim/assessment';
 
   constructor(http: HttpClient) {
     super(http, environment.apiUrl);
   }
 
-  public addNewClaim(claim: any): Observable<any> {
+  public assessClaim(claim: any): Observable<any> {
     return this.postFile(`${this.controllerName}`, claim).pipe(
+      catchError((error) => {
+        console.error('Error:', error);
+        return [];
+      })
+    );
+  }
+
+  public reviewClaim(claim: any): Observable<any> {
+    return this.postFile(`claim-service/claim/review`, claim).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return [];
@@ -28,24 +35,6 @@ export class ClaimService extends RestService {
 
   public getClaim(claimNumber: string): Observable<Claim> {
     return this.get(`${this.controllerName}/${claimNumber}`).pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return [];
-      })
-    );
-  }
-
-  public getClaims(): Observable<ClaimList> {
-    return this.get('claim-service/claims').pipe(
-      catchError((error) => {
-        console.error('Error:', error);
-        return [];
-      })
-    );
-  }
-
-  public getAssignedClaims(): Observable<ClaimList> {
-    return this.get(`claim-service/claims/assigned`).pipe(
       catchError((error) => {
         console.error('Error:', error);
         return [];

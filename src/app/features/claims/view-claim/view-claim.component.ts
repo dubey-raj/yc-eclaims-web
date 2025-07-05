@@ -4,6 +4,8 @@ import { Claim } from '../../../core/models/claim';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { LOCAL_STORAGE_ENTRIES } from '../../../core/constants/appConstants';
 
 @Component({
   selector: 'view-claim',
@@ -18,10 +20,13 @@ export class ViewClaimComponent {
   claim: Claim | null = null;
   claimNumber: string ='';
 
-  constructor(private route: ActivatedRoute, private claimService: ClaimService) { }
+  constructor(private claimService: ClaimService,
+    private localStorageService: LocalStorageService
+  ) { }
 
   async ngOnInit() {
-    this.claimNumber = this.route.snapshot.paramMap.get('claimNumber') || '';
+    //this.claimNumber = this.route.snapshot.paramMap.get('claimNumber') || '';
+    this.claimNumber = this.localStorageService.getValueByKey(LOCAL_STORAGE_ENTRIES.storedClaimNumber) ?? '';
     await this.loadClaim();
   }
 

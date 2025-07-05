@@ -1,0 +1,85 @@
+<form [formGroup]="claimReviewForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h4>Claim Number - {{ claim?.claimNumber }}</h4>
+          <hr />
+          <div class="row">
+            <div class="col-md-4">
+              <p><strong>Vehicle Number: {{ claim?.vehicleNumber }}</strong></p>
+            </div>
+            <div class="col-md-4">
+              <p><strong>Incident Date:</strong> {{ claim?.incidentDate }}</p>
+            </div>
+            <div class="col-md-4">
+              <p><strong>Location:</strong> {{ claim?.incidentLocation }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <p><strong>Submitted At:</strong> {{ claim?.submittedAt | date }}</p>
+            </div>
+            <div class="col-md-2">
+              <p><strong>Description:</strong></p>
+            </div>
+            <div class="col-md-6">
+              <p>{{ claim?.incidentDescription }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <p><strong>Documents:</strong></p>
+            </div>
+            <div class="col-md-10">
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let url of claim?.documentUrls; let i = index">
+                  <a href="{{ url }}" target="_blank"><i class="feather icon-file-text"></i> {{ i+1
+                    }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <p><strong>Inspection Date: </strong>{{ claim?.inspectionDate }}</p>
+            </div>
+            <div class="col-md-4">
+              <p><strong>Estimated Damage Cost (₹):</strong> {{ claim?.estimatedAmount }}</p>
+            </div>
+            <div class="col-md-4">
+              <p><strong>Recommendation: </strong>{{ claim?.inspectorRecommendation }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p><strong>Inspection Notes:</strong> {{ claim?.inspectionNote }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="claimStatus">Claim Status</label>
+                <select class="form-control" id="claimStatus" formControlName="claimStatus">
+                  <option value="">Select Status</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="reviewNotes">Review Notes</label>
+                <textarea class="form-control" id="reviewNotes" rows="2"
+                  formControlName="reviewNotes" placeholder="final review comments"></textarea>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="claimReviewForm.invalid">
+            Submit Assessment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

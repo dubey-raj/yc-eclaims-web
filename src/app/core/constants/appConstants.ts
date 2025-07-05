@@ -1,5 +1,5 @@
 export const LOCAL_STORAGE_ENTRIES = {
-  storedUserId: 'userId',
+  storedClaimNumber: 'claimNumber',
   storedUser: 'user',
   storedUserRole: 'role',
   storedCurrency: 'currency',
