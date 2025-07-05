@@ -61,6 +61,9 @@ export class LoginComponent {
       if(userRole == 'Customer'){
         landingPageUrl = '/claims/my-claims';
       }
+      else if(userRole == 'Manager'){
+        landingPageUrl = '/claims/dashboard';
+      }
       this.router.navigate([landingPageUrl]);
     });
   }
