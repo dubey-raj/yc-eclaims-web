@@ -40,8 +40,8 @@ export class AppNavComponent {
 
       case 'manager':
         this.navItems = [
-          { label: 'Review Claims', icon: 'feather icon-briefcase', path: '/claims/assigned-claims' },
-          { label: 'User Management', icon: 'feather icon-users', path: '/users' }
+          { label: 'Dashboard', icon: 'feather icon-home', path: '/claims/dashboard' },
+          { label: 'Review Claims', icon: 'feather icon-briefcase', path: '/claims/assigned-claims' }
         ];
         break;
     }

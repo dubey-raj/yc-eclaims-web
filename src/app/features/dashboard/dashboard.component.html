@@ -1,240 +1,176 @@
-<div class="row">
-    <!-- Claim Summary Widgets -->
-    <div class="col-lg-7 col-md-12">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="card support-bar overflow-hidden">
-            <div class="card-body pb-0">
-              <h2 class="m-0">342</h2>
-              <span class="text-c-blue">Total Claims</span>
-              <p class="mb-3 mt-3">Number of claims submitted so far.</p>
+<div class="row mb-5">
+    <!-- Total Claims Widget -->
+    <div class="col-lg-5 col-md-6">
+        <div class="card support-bar overflow-hidden h-100 d-flex flex-column">
+            <div class="card-body pb-0 flex-grow-1">
+                <h2 class="m-0">{{ dashboardData.totalClaims }}</h2>
+                <span class="text-c-blue">Total Claims</span>
+                <p class="mb-3 mt-3">Number of claims submitted so far.</p>
             </div>
-            <div id="claims-total-chart"></div>
+            <div id="claims-total-chart" class="flex-grow-0"></div>
             <div class="card-footer bg-primary text-white">
-              <div class="row text-center">
-                <div class="col">
-                  <h4 class="m-0 text-white">210</h4>
-                  <span>Approved</span>
+                <div class="row text-center">
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.claimsSummary.inInspection }}</h6>
+                        <span>Inspection</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.claimsSummary.approved }}</h6>
+                        <span>Approved</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.claimsSummary.inReview }}</h6>
+                        <span>In Review</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.claimsSummary.rejected }}</h6>
+                        <span>Rejected</span>
+                    </div>
                 </div>
-                <div class="col">
-                  <h4 class="m-0 text-white">58</h4>
-                  <span>In Review</span>
-                </div>
-                <div class="col">
-                  <h4 class="m-0 text-white">74</h4>
-                  <span>Rejected</span>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-        <div class="col-sm-6">
-          <div class="card support-bar overflow-hidden">
-            <div class="card-body pb-0">
-              <h2 class="m-0">5</h2>
-              <span class="text-c-green">Pending Approvals</span>
-              <p class="mb-3 mt-3">Claims awaiting manager decision.</p>
+    </div>
+
+    <!-- Pending Approvals Widget -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card support-bar overflow-hidden h-100 d-flex flex-column">
+            <div class="card-body pb-0 flex-grow-1">
+                <h2 class="m-0">{{ dashboardData.pendingApprovals.total }}</h2>
+                <span class="text-c-green">Pending Approvals</span>
+                <p class="mb-3 mt-3">Claims awaiting manager decision.</p>
             </div>
-            <div id="claims-pending-chart"></div>
+            <div id="claims-pending-chart" class="flex-grow-0"></div>
             <div class="card-footer bg-success text-white">
-              <div class="row text-center">
-                <div class="col">
-                  <h4 class="m-0 text-white">2</h4>
-                  <span>New</span>
+                <div class="row text-center">
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.pendingApprovals.new }}</h6>
+                        <span>New</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.pendingApprovals.escalated }}</h6>
+                        <span>Escalated</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="m-0 text-white">{{ dashboardData.pendingApprovals.delayed }}</h6>
+                        <span>Delayed</span>
+                    </div>
                 </div>
-                <div class="col">
-                  <h4 class="m-0 text-white">3</h4>
-                  <span>Escalated</span>
-                </div>
-                <div class="col">
-                  <h4 class="m-0 text-white">0</h4>
-                  <span>Delayed</span>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  
-    <!-- Quick Stats Section -->
-    <div class="col-lg-5 col-md-12">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h4 class="text-c-yellow">2.3 days</h4>
-                  <h6 class="text-muted m-b-0">Avg. Processing Time</h6>
+
+    <!-- Merged Quick Stats Widget -->
+    <div class="col-lg-3 col-md-12">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body flex-grow-1">
+                <h5 class="mb-3">Quick Stats</h5>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center">
+                            <i class="feather icon-clock text-c-yellow mr-2 f-20"></i>
+                            <div>
+                                <strong>{{ dashboardData.quickStats.averageProcessingTime }} days</strong>
+                                <p class="mb-0 text-muted">Avg. Processing</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center">
+                            <i class="feather icon-check-circle text-c-green mr-2 f-20"></i>
+                            <div>
+                                <strong>{{ dashboardData.quickStats.approvalRate }}%</strong>
+                                <p class="mb-0 text-muted">Approval Rate</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-4 text-right">
-                  <i class="feather icon-clock f-28"></i>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center">
+                            <i class="feather icon-alert-triangle text-c-red mr-2 f-20"></i>
+                            <div>
+                                <strong>{{ dashboardData.quickStats.delayedClaims }}</strong>
+                                <p class="mb-0 text-muted">Delayed Claims</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center">
+                            <i class="feather icon-users text-c-blue mr-2 f-20"></i>
+                            <div>
+                                <strong>{{ dashboardData.quickStats.activeInspectors }}</strong>
+                                <p class="mb-0 text-muted">Active Inspectors</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="card-footer bg-c-yellow">
-              <div class="row align-items-center">
-                <div class="col-9">
-                  <p class="text-white m-b-0">Compared to last week</p>
-                </div>
-                <div class="col-3 text-right">
-                  <i class="feather icon-trending-up text-white f-16"></i>
-                </div>
-              </div>
+            <div class="card-footer bg-light text-muted">
+                <small>Updated just now</small>
             </div>
-          </div>
         </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h4 class="text-c-green">95%</h4>
-                  <h6 class="text-muted m-b-0">Approval Rate</h6>
-                </div>
-                <div class="col-4 text-right">
-                  <i class="feather icon-check-circle f-28"></i>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer bg-c-green">
-              <div class="row align-items-center">
-                <div class="col-9">
-                  <p class="text-white m-b-0">Monthly performance</p>
-                </div>
-                <div class="col-3 text-right">
-                  <i class="feather icon-trending-up text-white f-16"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h4 class="text-c-red">12</h4>
-                  <h6 class="text-muted m-b-0">Delayed Claims</h6>
-                </div>
-                <div class="col-4 text-right">
-                  <i class="feather icon-alert-triangle f-28"></i>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer bg-c-red">
-              <div class="row align-items-center">
-                <div class="col-9">
-                  <p class="text-white m-b-0">Past 7 days</p>
-                </div>
-                <div class="col-3 text-right">
-                  <i class="feather icon-trending-down text-white f-16"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h4 class="text-c-blue">8</h4>
-                  <h6 class="text-muted m-b-0">Inspectors Active</h6>
-                </div>
-                <div class="col-4 text-right">
-                  <i class="feather icon-users f-28"></i>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer bg-c-blue">
-              <div class="row align-items-center">
-                <div class="col-9">
-                  <p class="text-white m-b-0">Live right now</p>
-                </div>
-                <div class="col-3 text-right">
-                  <i class="feather icon-trending-up text-white f-16"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  
-    <!-- Assigned Claims Table -->
+</div>
+
+<!-- Assigned Claims Table -->
+<div class="row">
     <div class="col-xl-12 col-md-12">
-      <div class="card table-card">
-        <div class="card-header">
-          <h5>Recently Assigned Claims</h5>
-          <div class="card-header-right">
-            <div class="btn-group card-option">
-              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="feather icon-more-horizontal"></i>
-              </button>
-              <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                <li class="dropdown-item full-card"><a href="#"><i class="feather icon-maximize"></i> Maximize</a></li>
-                <li class="dropdown-item minimize-card"><a href="#"><i class="feather icon-minus"></i> Collapse</a></li>
-                <li class="dropdown-item reload-card"><a href="#"><i class="feather icon-refresh-cw"></i> Reload</a></li>
-                <li class="dropdown-item close-card"><a href="#"><i class="feather icon-trash"></i> Remove</a></li>
-              </ul>
+        <div class="card table-card">
+            <div class="card-header">
+                <h5>Recently Assigned Claims</h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="feather icon-more-horizontal"></i>
+                        </button>
+                        <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item full-card"><a href="#"><i class="feather icon-maximize"></i>
+                                    Maximize</a></li>
+                            <li class="dropdown-item minimize-card"><a href="#"><i class="feather icon-minus"></i>
+                                    Collapse</a></li>
+                            <li class="dropdown-item reload-card"><a href="#"><i class="feather icon-refresh-cw"></i>
+                                    Reload</a></li>
+                            <li class="dropdown-item close-card"><a href="#"><i class="feather icon-trash"></i>
+                                    Remove</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Inspector</th>
+                                <th>Claim ID</th>
+                                <th>Assignment Date</th>
+                                <th class="text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let claim of dashboardData.recentAssignments">
+                                <td>
+                                    <div class="d-inline-block">
+                                        <h6>{{ claim.inspectorName }}</h6>
+                                    </div>
+                                </td>
+                                <td>{{ claim.claimId }}</td>
+                                <td>{{ claim.assignedDate }}</td>
+                                <td class="text-right">
+                                    <label class="badge" [ngClass]="getBadgeClass(claim.status)">
+                                        {{ claim.status }}
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr *ngIf="dashboardData.recentAssignments.length === 0">
+                                <td colspan="4" class="text-center">No claims assigned recently.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="card-body p-0">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>Inspector</th>
-                  <th>Claim ID</th>
-                  <th>Assignment Date</th>
-                  <th class="text-right">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img src="assets/images/user/avatar-4.jpg" alt="Inspector" class="img-radius wid-40 align-top m-r-15">
-                    <div class="d-inline-block">
-                      <h6>John Deo</h6>
-                      <p class="text-muted m-b-0">Inspector</p>
-                    </div>
-                  </td>
-                  <td>CLM1023</td>
-                  <td>Jul 04</td>
-                  <td class="text-right"><label class="badge badge-light-warning">Under Review</label></td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="assets/images/user/avatar-2.jpg" alt="Inspector" class="img-radius wid-40 align-top m-r-15">
-                    <div class="d-inline-block">
-                      <h6>Jenifer Vintage</h6>
-                      <p class="text-muted m-b-0">Inspector</p>
-                    </div>
-                  </td>
-                  <td>CLM1044</td>
-                  <td>Jul 03</td>
-                  <td class="text-right"><label class="badge badge-light-success">Reviewed</label></td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="assets/images/user/avatar-3.jpg" alt="Inspector" class="img-radius wid-40 align-top m-r-15">
-                    <div class="d-inline-block">
-                      <h6>William Jem</h6>
-                      <p class="text-muted m-b-0">Inspector</p>
-                    </div>
-                  </td>
-                  <td>CLM1078</td>
-                  <td>Jul 02</td>
-                  <td class="text-right"><label class="badge badge-light-danger">Escalated</label></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>
